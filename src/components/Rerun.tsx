@@ -13,6 +13,12 @@ interface Answer {
   ranAt: string;
 }
 
+/**
+ * One call to a model, on one publication. What comes back is a new proposal,
+ * and it is labelled as one: the table, the export and the figure above stay
+ * the recorded run, whatever this returns. Two readings may differ, and the
+ * page says which of them is the output of record.
+ */
 export function Rerun({ fileId }: { fileId: string }) {
   const [state, setState] = useState<"idle" | "running">("idle");
   const [answer, setAnswer] = useState<Answer | null>(null);
@@ -35,7 +41,7 @@ export function Rerun({ fileId }: { fileId: string }) {
         setAnswer(payload as Answer);
       }
     } catch {
-      setMessage("The run did not come back. The recorded run stays on the page.");
+      setMessage("The run did not come back. The recorded output stays the one of record.");
     } finally {
       setState("idle");
     }
@@ -50,28 +56,34 @@ export function Rerun({ fileId }: { fileId: string }) {
           disabled={state === "running"}
           className="rounded-lg bg-ink px-5 py-3 text-[14.5px] font-medium text-white transition hover:bg-[#23262d] disabled:opacity-55"
         >
-          {state === "running" ? "Reading the file again..." : "Propose the correspondence again"}
+          {state === "running" ? "Asking the model again..." : "Propose the correspondence again"}
         </button>
-        <p className="max-w-[420px] text-[13.5px] leading-[1.6] text-muted">
-          One call to a model, on this publication only, capped per day. It reads the file from
-          scratch, so its reading can differ from the recorded one. Where it does, the program runs the
-          new reading and the trace names the published passage it rests on.
+        <p className="max-w-[620px] text-[13px] leading-[1.6] text-muted">
+          <span className="font-medium text-ink">Recorded output above.</span> This is one call to a model,
+          capped per day, on the same profile and the same documentation as the recorded run, so its reading
+          can differ. What comes back is a new proposal, and nothing on this page is republished from it.
         </p>
       </div>
 
-      {message ? <p className="mt-5 text-[14.5px] text-[#8a5300]">{message}</p> : null}
+      {message ? <p className="mt-5 text-[14px] text-[#8a5300]">{message}</p> : null}
 
       {answer ? (
-        <div className="mt-8 border-t border-rule pt-8">
+        <div className="mt-8 rounded-xl bg-[#fbfaf7] p-6 ring-1 ring-[#efe8d8]">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <p className="eyebrow">Just now, on the same file</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#8a5300]">
+              New proposal, not published
+            </p>
             <p className="text-[12.5px] text-muted tnum">
               {answer.usage.inputTokens.toLocaleString("en-GB")} tokens in,{" "}
               {answer.usage.outputTokens.toLocaleString("en-GB")} out
             </p>
           </div>
+          <p className="mt-2 text-[13.5px] leading-[1.6] text-muted">
+            Just now, on the same file. The recorded output above, the table and the export are unchanged
+            by this: nothing on this page is republished from a live run.
+          </p>
 
-          <div className="mt-5 grid gap-x-10 gap-y-6 sm:grid-cols-2">
+          <div className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2">
             <Field label="Value column" value={answer.proposal.valueColumns.join(" + ")} />
             <Field
               label="Rows kept"
@@ -84,16 +96,21 @@ export function Rerun({ fileId }: { fileId: string }) {
             <Field label="What a row carries" value={SEMANTICS_LABEL[answer.proposal.rowSemantics]} />
           </div>
 
-          <div className="mt-8">
+          <div className="mt-7">
             <VerdictBadge verdict={answer.execution.verdict} />
-            <p className="mt-4 text-[15.5px] leading-[1.7] text-ink">{answer.execution.statement}</p>
+            <p className="mt-3.5 text-[15px] leading-[1.7] text-ink">{answer.execution.statement}</p>
           </div>
 
-          <div className="mt-8">
-            <Trace checks={answer.execution.checks} />
-          </div>
+          <details className="group mt-6">
+            <summary className="cursor-pointer list-none text-[13.5px] font-medium text-ink underline decoration-rule underline-offset-4 hover:decoration-ink">
+              What the code checked on this proposal
+            </summary>
+            <div className="mt-5">
+              <Trace checks={answer.execution.checks} />
+            </div>
+          </details>
 
-          <p className="mt-8 text-[13px] text-muted">
+          <p className="mt-6 text-[13px] leading-[1.6] text-muted">
             The decision it left open: {answer.proposal.openQuestion}
           </p>
         </div>
@@ -106,7 +123,7 @@ function Field({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <p className="eyebrow">{label}</p>
-      <p className="mt-1.5 font-mono text-[13.5px] leading-[1.6] text-ink">{value}</p>
+      <p className="mt-1.5 font-mono text-[13px] leading-[1.6] text-ink">{value}</p>
     </div>
   );
 }

@@ -82,7 +82,7 @@ export async function POST(request: Request) {
     const { text, documentation } = profileFor(fileId);
     const { proposal, usage } = await propose(caseDef.city, caseDef.year, text, documentation);
     recordProviderSuccess();
-    const execution = runOne(fileId, proposal);
+    const execution = runOne(fileId, proposal, caseDef.year);
     return NextResponse.json({
       proposal,
       execution,

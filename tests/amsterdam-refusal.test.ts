@@ -7,10 +7,10 @@
  */
 import { describe, expect, it } from "vitest";
 import { runOne } from "../src/lib/run";
-import { recorded } from "./helpers";
+import { recorded, YEAR } from "./helpers";
 
 const [run] = recorded("amsterdam");
-const result = runOne(run.fileId, run.proposal);
+const result = runOne(run.fileId, run.proposal, YEAR);
 
 describe("a source where a known difference forbids this use", () => {
   it("is out of scope for the operation, not a fault of the publication", () => {
@@ -23,10 +23,12 @@ describe("a source where a known difference forbids this use", () => {
     expect(result.valueGj).toBeNull();
   });
 
-  it("names the condition that is missing", () => {
-    expect(result.missingCondition).toBe(
-      "A field, in the publication, that distinguishes the consumption of a period from a figure restated for the whole year.",
-    );
+  it("names the choice that is actually left, not a field the documentation already carries", () => {
+    // The publisher already documents this column as an annual estimate. What
+    // is open is which quantity the operation wants, and at which reference date.
+    expect(result.missingCondition).toContain("the one realised over 2024");
+    expect(result.missingCondition).toContain("a figure restated for the period at a reference date");
+    expect(result.missingCondition).toContain("a stated rule for choosing that reference date");
   });
 
   it("shows the four figures, how close they are, and what adding them would have given", () => {
@@ -39,11 +41,24 @@ describe("a source where a known difference forbids this use", () => {
     expect(result.statement).toContain("18,568.66");
   });
 
-  it("refuses on a quote the code found in the publisher's own documentation", () => {
-    const additive = result.checks.find((c) => c.id === "rows_are_additive");
-    expect(additive?.by).toBe("code");
-    expect(additive?.outcome).toBe("fail");
-    expect(additive?.detail).toContain("jaarverbruik");
+  it("does not claim that one of the four is the year", () => {
+    // An annualised estimate is not the quantity realised over the year, however
+    // close the four of them are to one another.
+    expect(result.statement).toContain("None of them is therefore the quantity realised over the period");
+    expect(result.statement).not.toContain("worth one of them");
+  });
+
+  it("splits the reading, the passage and the sum into three facts with their own author", () => {
+    const reading = result.checks.find((c) => c.id === "rows_are_additive");
+    const located = result.checks.find((c) => c.id === "additivity_passage_located");
+    const added = result.checks.find((c) => c.id === "rows_added");
+    expect(reading?.by).toBe("model");
+    expect(reading?.outcome).toBe("fail");
+    expect(located?.by).toBe("code");
+    expect(located?.outcome).toBe("pass");
+    expect(located?.detail).toContain("jaarverbruik");
+    expect(added?.by).toBe("code");
+    expect(added?.outcome).toBe("not_applicable");
     expect(result.passages.some((p) => p.located && p.quote.includes("jaarverbruik"))).toBe(true);
   });
 

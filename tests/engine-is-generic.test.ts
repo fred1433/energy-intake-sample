@@ -13,7 +13,7 @@ import { execute } from "../src/lib/engine/execute";
 import { parse } from "../src/lib/engine/table";
 import { CASES, fileOf } from "../src/lib/sources";
 import { materialFor, runOne } from "../src/lib/run";
-import { clone, recorded } from "./helpers";
+import { clone, recorded, YEAR } from "./helpers";
 
 const ENGINE = path.join(process.cwd(), "src", "lib", "engine");
 const files = readdirSync(ENGINE)
@@ -70,7 +70,7 @@ describe("renaming every column changes nothing", () => {
   for (const caseId of ["vienna", "ghent"]) {
     for (const run of recorded(caseId)) {
       it(`${run.fileId} reaches the same answer under meaningless column names`, () => {
-        const before = runOne(run.fileId, run.proposal);
+        const before = runOne(run.fileId, run.proposal, YEAR);
         const { source } = fileOf(run.fileId);
         const material = materialFor(source, run.proposal.dialect.encoding);
         const { text, renamed } = renameColumns(material.fileText, run.proposal.dialect.delimiter);
@@ -82,7 +82,7 @@ describe("renaming every column changes nothing", () => {
         p.unitColumn = p.unitColumn ? (renamed.get(p.unitColumn) ?? p.unitColumn) : null;
         p.periodColumn = p.periodColumn ? (renamed.get(p.periodColumn) ?? p.periodColumn) : null;
 
-        const after = execute(p, material);
+        const after = execute(p, material, { period: YEAR });
         expect(after.verdict).toBe(before.verdict);
         expect(after.rowsRetained).toBe(before.rowsRetained);
         expect(after.rawTotal).toBe(before.rawTotal);

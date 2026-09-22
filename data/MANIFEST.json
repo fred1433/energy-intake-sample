@@ -6,8 +6,11 @@
       "id": "vienna",
       "city": "Vienna",
       "producer": "Stadt Wien, Magistratsabteilung 20 (Energieplanung)",
-      "licence": "Creative Commons Attribution 4.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/deed.de",
+      "rights": {
+        "kind": "licence",
+        "label": "Creative Commons Attribution 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/deed.de"
+      },
       "retrievedAt": "2026-09-22",
       "files": [
         {
@@ -30,8 +33,12 @@
       "id": "amsterdam",
       "city": "Amsterdam",
       "producer": "Gemeente Amsterdam, Datateam Stedelijke Ontwikkeling en Beheer (network data from Liander and Stedin)",
-      "licence": "Published as OPENBAAR on the municipal API",
-      "licenceUrl": "https://api.data.amsterdam.nl/v1/energieverbruik_mra/",
+      "rights": {
+        "kind": "access",
+        "label": "OPENBAAR",
+        "url": "https://api.data.amsterdam.nl/v1/energieverbruik_mra/",
+        "note": "An access level published with the table, not a licence. The municipality names no licence beside it."
+      },
       "retrievedAt": "2026-09-22",
       "files": [
         {
@@ -48,8 +55,11 @@
       "id": "barcelona",
       "city": "Barcelona",
       "producer": "Ajuntament de Barcelona, Oficina Municipal de Dades (data from the Datadis platform)",
-      "licence": "Creative Commons Attribution 4.0",
-      "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "rights": {
+        "kind": "licence",
+        "label": "Creative Commons Attribution 4.0",
+        "url": "http://creativecommons.org/licenses/by/4.0/"
+      },
       "retrievedAt": "2026-09-22",
       "files": [
         {
@@ -66,8 +76,11 @@
       "id": "ghent",
       "city": "Ghent",
       "producer": "Fluvius, distribution network operator for Flanders (Dataroom Fluvius)",
-      "licence": "Open data license - FLUVIUS",
-      "licenceUrl": "https://opendata.fluvius.be/p/licentieopendatafluvius",
+      "rights": {
+        "kind": "licence",
+        "label": "Open data license - FLUVIUS",
+        "url": "https://opendata.fluvius.be/p/licentieopendatafluvius"
+      },
       "retrievedAt": "2026-09-22",
       "files": [
         {

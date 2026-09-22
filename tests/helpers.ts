@@ -14,6 +14,9 @@ export function recorded(caseId: string): RecordedRun[] {
   return (JSON.parse(readFileSync(file, "utf-8")) as { runs: RecordedRun[] }).runs;
 }
 
+/** The period every recorded case asks for. Passed in, never read back out of a proposal. */
+export const YEAR = "2024";
+
 export function clone<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T;
 }

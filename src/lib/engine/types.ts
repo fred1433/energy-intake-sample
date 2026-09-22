@@ -6,8 +6,9 @@
  * territory, expressed in GWh, from an open municipal publication.
  *
  * Nothing here names a city, a column or a publisher. The engine is handed a
- * table, a documentation text, and a correspondence proposal; it executes what
- * it can check and refuses the rest by naming the condition.
+ * table, a documentation text, a correspondence proposal and the period the
+ * operation asks for; it executes what it can check and refuses the rest by
+ * naming the condition.
  */
 
 /** The energy units this program is willing to convert between. */
@@ -54,7 +55,7 @@ export interface Proposal {
   rowFilters: { column: string; equals: string }[];
   /** The columns carrying the quantity the operation asks for. Several when the publication splits it into parts. */
   valueColumns: string[];
-  /** The column that tells which period a row is filed under, when there is one. */
+  /** The column that tells which period a row is filed under. */
   periodColumn: string | null;
   declaredUnit: Unit | "not_declared";
   unitEvidence: { kind: UnitEvidenceKind; quote: string | null };
@@ -69,15 +70,25 @@ export interface Proposal {
   citations: Citation[];
 }
 
+/**
+ * What the operation asks for, handed to the engine separately from the
+ * proposal, so that the period the rows are filed under can be checked against
+ * the period that was asked for rather than assumed to match it.
+ */
+export interface Ask {
+  /** The period the operation asks for, as the caller writes it. */
+  period: string;
+}
+
 export type Verdict =
   /** The documented conditions this program checks are met. */
   | "admissible"
-  /** A known difference forbids this precise use. */
+  /** A difference between what the publication carries and what was asked for forbids this use. */
   | "out_of_scope"
   /** A necessary condition is not established. */
   | "insufficient_information"
-  /** Two published statements about the same object cannot both hold. */
-  | "documentary_contradiction";
+  /** The total produced falls outside the magnitude band this program accepts. */
+  | "magnitude_check_failed";
 
 export interface Check {
   id: string;
@@ -85,6 +96,8 @@ export interface Check {
   /** Who did this step. The whole point of the trace. */
   by: "model" | "code" | "human";
   outcome: "pass" | "fail" | "not_applicable";
+  /** True only for the one check that ended the operation. A failure elsewhere is local. */
+  stops: boolean;
   detail: string;
 }
 
@@ -95,20 +108,38 @@ export interface Passage {
   supports: string;
 }
 
+/** What the magnitude check compared, kept so the page can show it in full. */
+export interface Magnitude {
+  rawTotal: number;
+  unit: Unit;
+  gwh: number;
+  minGwh: number;
+  maxGwh: number;
+  /** Where the band comes from. It is this program's, not the publisher's. */
+  origin: string;
+}
+
 export interface Execution {
   verdict: Verdict;
   /** One sentence about the operation. Never about the city, never about the publisher. */
   statement: string;
+  /** The same thing in one short clause, for a table line. */
+  headline: string;
   /** The condition that would have to be established, when there is one. */
   missingCondition: string | null;
-  /** For a documentary contradiction: the passages that cannot both hold, verbatim. */
-  incompatiblePassages: Passage[];
   checks: Check[];
   passages: Passage[];
   rowsRead: number;
   rowsRetained: number;
+  /** The period the operation asked for, and the periods the kept rows are filed under. */
+  askedFor: string;
+  periodsObserved: string[];
   /** The total in the publication's own unit, before any conversion. */
   rawTotal: number | null;
+  /** What each added column contributed to that total, so it can be added up by hand. */
+  parts: { column: string; value: number }[];
+  /** Set when the total was produced but fell outside the band this program accepts. */
+  magnitude: Magnitude | null;
   /** The conversions the code ran, each shown with its factor. */
   conversion: {
     fromUnit: Unit;

@@ -1,5 +1,5 @@
-city,year,value_gwh,value_gj,decision,source_retrieved
-Vienna,2024,7796.50,28067400,admissible,2026-09-22
-Amsterdam,2024,,,out_of_scope,2026-09-22
-Barcelona,2024,,,documentary_contradiction,2026-09-22
-Ghent,2024,,,insufficient_information,2026-09-22
+city,year,value_gwh,value_gj,decision,reason,evidence,source_url,source_retrieved
+Vienna,2024,7796.50,28067400,admissible,"7,796.5 and 7,796.5 GWh, from two separately published files, differ by 0 GWh.",https://energy-intake.theaipipe.com/#vienna,https://www.wien.gv.at/data/ogd/ma20/endenergieenergietraeger2024.csv,2026-09-22
+Amsterdam,2024,,,out_of_scope,"The value is documented as a figure for a whole period, filed once under each sub-period.",https://energy-intake.theaipipe.com/#amsterdam,https://api.data.amsterdam.nl/v1/energieverbruik_mra/v4/gas_en_elektriciteit_kwartaal/?gemeente=AMSTERDAM&_format=csv,2026-09-22
+Barcelona,2024,,,magnitude_check_failed,"5,998,510.71 GWh under the declared unit, outside the 100 to 100,000 GWh band this program applies.",https://energy-intake.theaipipe.com/#barcelona,https://opendata-ajuntament.barcelona.cat/data/dataset/d9479057-781f-42b4-85e6-721bd0284130/resource/6f3a256a-dba6-46ac-88a4-546b93cb46da/download,2026-09-22
+Ghent,2024,,,insufficient_information,First blocking condition: the unit of the value column is not established.,https://energy-intake.theaipipe.com/#ghent,https://opendata.fluvius.be/api/explore/v2.1/catalog/datasets/1_06a-verbruiksgegevens-per-statistische-sector-met-nace-sector-en-nace-subsecto/exports/csv?where=gemeente%3D%22GENT%22&delimiter=%3B,2026-09-22

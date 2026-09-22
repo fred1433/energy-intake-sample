@@ -10,16 +10,17 @@ export const OPERATION =
 export const TARGET_UNIT: Unit = "GWh";
 
 /**
- * The range in which this program accepts a result of the kind the operation
- * asks for. It is not a statement about any city: it is the width outside which
- * a produced quantity is not of the kind asked for, which in practice only ever
- * catches a unit read three orders of magnitude away from the published one.
+ * The magnitude band. It belongs to this program and to no publisher: it is a
+ * rule we wrote, and a total outside it is a signal, not a fault found in
+ * anybody's publication. What a total outside it means is left open on purpose,
+ * because a magnitude anomaly alone cannot say whether the unit, the rows added
+ * or the perimeter kept is the one to look at.
  */
 export const BAND = {
   minGwh: 100,
   maxGwh: 100_000,
   origin:
-    "Ten times wider on each side than every city total we measured ourselves before writing this program: the smallest was 1 287 GWh, the largest 12 197 GWh.",
+    "Set by us, ten times wider on each side than every city total we measured ourselves before writing this program: the smallest was 1 287 GWh, the largest 12 197 GWh.",
 };
 
 /** How close two independently published figures must be to count as agreeing. */

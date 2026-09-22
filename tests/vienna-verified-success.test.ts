@@ -7,11 +7,11 @@
  */
 import { describe, expect, it } from "vitest";
 import { crossCheck, runOne } from "../src/lib/run";
-import { recorded } from "./helpers";
+import { recorded, YEAR } from "./helpers";
 
 const runs = recorded("vienna");
-const carriers = runOne(runs[0].fileId, runs[0].proposal);
-const sectors = runOne(runs[1].fileId, runs[1].proposal);
+const carriers = runOne(runs[0].fileId, runs[0].proposal, YEAR);
+const sectors = runOne(runs[1].fileId, runs[1].proposal, YEAR);
 
 describe("a source whose conditions are met", () => {
   it("is admissible for the operation", () => {

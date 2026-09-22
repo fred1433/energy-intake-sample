@@ -21,10 +21,39 @@ const JOULES: Record<Unit, number> = {
   TJ: 1e12,
 };
 
+/**
+ * How each unit is written in the languages these publications are written in:
+ * the symbol, and the word it is short for. Used for one narrow check, and only
+ * that one: a passage offered in support of a unit must at least name that unit.
+ */
+const SPELLINGS: Record<Unit, { symbol: string; words: string[] }> = {
+  kWh: { symbol: "kwh", words: ["kilowatt"] },
+  MWh: { symbol: "mwh", words: ["megawatt"] },
+  GWh: { symbol: "gwh", words: ["gigawatt"] },
+  TWh: { symbol: "twh", words: ["terawatt"] },
+  GJ: { symbol: "gj", words: ["gigajoule"] },
+  TJ: { symbol: "tj", words: ["terajoule"] },
+};
+
 export const KNOWN_UNITS = Object.keys(JOULES) as Unit[];
 
 export function isUnit(value: string): value is Unit {
   return Object.prototype.hasOwnProperty.call(JOULES, value);
+}
+
+/**
+ * Does this passage name this unit at all?
+ *
+ * The narrowest useful question, and the only one the code can answer on its
+ * own. It catches a published passage offered in support of a unit it never
+ * mentions. It does not, and cannot here, establish that the passage is about
+ * the column the correspondence reads: that reading stays the model's.
+ */
+export function namesUnit(text: string, unit: Unit): boolean {
+  const hay = text.toLowerCase();
+  const { symbol, words } = SPELLINGS[unit];
+  if (words.some((w) => hay.includes(w))) return true;
+  return new RegExp(`(^|[^a-z0-9])${symbol}([^a-z0-9]|$)`).test(hay);
 }
 
 export function factor(from: Unit, to: Unit): number {

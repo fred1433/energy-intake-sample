@@ -3,7 +3,7 @@
  *
  * Nothing here decides anything either: it loads the bytes kept in this
  * repository, decodes them the way the proposal says the file is written, and
- * hands both to the engine.
+ * hands both to the engine, together with the period the operation asks for.
  */
 import { crossCheck, execute } from "./engine/execute";
 import { profile, renderProfile, sniffDelimiter } from "./engine/profile";
@@ -16,16 +16,22 @@ export function materialFor(source: SourceFile, encoding: Proposal["dialect"]["e
   return {
     fileText: decode(readBytes(source), encoding),
     documentation: readDocumentation(source),
-    objectPassage: source.objectPassage,
   };
 }
 
-export function runOne(fileId: string, proposal: Proposal): Execution {
+/**
+ * The period is passed in, never read back out of the proposal: the whole point
+ * of the check inside the engine is that the two can disagree.
+ */
+export function runOne(fileId: string, proposal: Proposal, period: string): Execution {
   const { source } = fileOf(fileId);
-  return execute(proposal, materialFor(source, proposal.dialect.encoding));
+  return execute(proposal, materialFor(source, proposal.dialect.encoding), { period });
 }
 
-/** What the model is shown: a description produced by code, not the file itself. */
+/**
+ * What the model is shown. Not the file: a description of it produced by code,
+ * its first lines copied exactly, and the publisher's own documentation.
+ */
 export function profileFor(fileId: string): { text: string; documentation: string } {
   const { source } = fileOf(fileId);
   const text = decode(readBytes(source), "utf-8-bom");
