@@ -1,5 +1,5 @@
 import type { Check, Execution, Passage, Verdict } from "@/lib/engine/types";
-import { VERDICT_LABEL } from "@/lib/engine/verdicts";
+import { VERDICT_LABEL, VERDICT_SHORT } from "@/lib/engine/verdicts";
 
 const TONE: Record<Verdict, string> = {
   admissible: "bg-[#edf6f0] text-[#146c43] ring-[#cfe6da]",
@@ -8,12 +8,28 @@ const TONE: Record<Verdict, string> = {
   insufficient_information: "bg-[#f2f4f8] text-[#44506a] ring-[#dde2ea]",
 };
 
-export function VerdictBadge({ verdict, className = "" }: { verdict: Verdict; className?: string }) {
+export function VerdictBadge({
+  verdict,
+  short = false,
+  className = "",
+}: {
+  verdict: Verdict;
+  /** Narrow screens get the short form of the same four answers. */
+  short?: boolean;
+  className?: string;
+}) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-3 py-1 text-[12.5px] font-medium ring-1 ring-inset ${TONE[verdict]} ${className}`}
+      className={`inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-1 sm:px-3 text-[12.5px] font-medium ring-1 ring-inset ${TONE[verdict]} ${className}`}
     >
-      {VERDICT_LABEL[verdict]}
+      {short ? (
+        <>
+          <span className="sm:hidden">{VERDICT_SHORT[verdict]}</span>
+          <span className="hidden sm:inline">{VERDICT_LABEL[verdict]}</span>
+        </>
+      ) : (
+        VERDICT_LABEL[verdict]
+      )}
     </span>
   );
 }

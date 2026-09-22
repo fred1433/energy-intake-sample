@@ -28,14 +28,15 @@ export default function Page() {
           second publication, and three exact reasons it would not produce the others.
         </p>
 
-        <div className="mt-14 overflow-hidden rounded-2xl bg-surface ring-1 ring-rule">
+        <div className="mt-14 rounded-2xl bg-surface ring-1 ring-rule">
+          <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="border-b border-rule">
-                <th className="px-6 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted sm:px-8">City</th>
-                <th className="px-6 py-4 text-right text-[12px] font-semibold uppercase tracking-[0.12em] text-muted sm:px-8">GWh</th>
-                <th className="hidden px-6 py-4 text-right text-[12px] font-semibold uppercase tracking-[0.12em] text-muted sm:table-cell sm:px-8">GJ</th>
-                <th className="px-6 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted sm:px-8">Decision</th>
+                <th className="px-4 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted sm:px-8">City</th>
+                <th className="px-5 py-4 text-right text-[12px] font-semibold uppercase tracking-[0.12em] text-muted sm:px-8">GWh</th>
+                <th className="hidden px-5 py-4 text-right text-[12px] font-semibold uppercase tracking-[0.12em] text-muted sm:table-cell sm:px-8">GJ</th>
+                <th className="px-4 py-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted sm:px-8">Decision</th>
               </tr>
             </thead>
             <tbody>
@@ -43,24 +44,25 @@ export default function Page() {
                 const e = runs[0].execution;
                 return (
                   <tr key={def.id} className={i === 0 ? "" : "border-t border-rule-soft"}>
-                    <td className="px-6 py-5 text-[16px] font-medium text-ink sm:px-8">
+                    <td className="px-4 py-5 text-[15px] font-medium text-ink sm:px-8 sm:text-[16px]">
                       {def.city} <span className="font-normal text-muted">{def.year}</span>
                     </td>
-                    <td className="px-6 py-5 text-right text-[16px] text-ink tnum sm:px-8">
-                      {e.valueGwh === null ? <span className="text-muted">not produced</span> : format(e.valueGwh)}
+                    <td className="px-4 py-5 text-right text-[15px] text-ink tnum sm:px-8 sm:text-[16px]">
+                      {e.valueGwh === null ? <span className="whitespace-nowrap text-muted">not produced</span> : format(e.valueGwh)}
                     </td>
-                    <td className="hidden px-6 py-5 text-right text-[16px] text-ink tnum sm:table-cell sm:px-8">
+                    <td className="hidden px-4 py-5 text-right text-[16px] text-ink tnum sm:table-cell sm:px-8">
                       {e.valueGj === null ? "" : format(e.valueGj)}
                     </td>
-                    <td className="px-6 py-5 sm:px-8">
-                      <VerdictBadge verdict={e.verdict} />
+                    <td className="px-4 py-5 sm:px-8">
+                      <VerdictBadge verdict={e.verdict} short />
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-rule bg-[#fafafb] px-6 py-5 sm:px-8">
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-4 rounded-b-2xl border-t border-rule bg-[#fafafb] px-5 py-5 sm:px-8">
             <p className="text-[13.5px] text-muted">
               {rows.length} rows, produced on 22 September 2026 from files downloaded the same day.
             </p>
