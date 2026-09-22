@@ -314,15 +314,15 @@ export default function Page() {
             </p>
             <p className="mt-3 text-[13.5px] text-muted">
               No network, no model call: <code className="font-mono text-[13px]">npm test</code>.{" "}
-              <a className="underline decoration-rule underline-offset-4 hover:decoration-ink" href={`${REPO}/tree/master/tests`}>
+              <a className="underline decoration-rule underline-offset-4 hover:decoration-ink" href={`${REPO}/tree/main/tests`}>
                 The tests
               </a>
               ,{" "}
-              <a className="underline decoration-rule underline-offset-4 hover:decoration-ink" href={`${REPO}/tree/master/src/lib/engine`}>
+              <a className="underline decoration-rule underline-offset-4 hover:decoration-ink" href={`${REPO}/tree/main/src/lib/engine`}>
                 the engine
               </a>
               ,{" "}
-              <a className="underline decoration-rule underline-offset-4 hover:decoration-ink" href={`${REPO}/tree/master/src/recorded`}>
+              <a className="underline decoration-rule underline-offset-4 hover:decoration-ink" href={`${REPO}/tree/main/src/recorded`}>
                 what the model proposed
               </a>
               .
