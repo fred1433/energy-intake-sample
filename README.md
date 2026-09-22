@@ -119,4 +119,8 @@ kept here still match.
 
 ## Licence
 
-MIT for the code. The data files keep their own licences, named above and in the manifest.
+MIT for the code in this repository.
+
+The files under `data/` are not covered by it. Each one keeps the licence of the office that
+published it, named above and recorded per file in `data/MANIFEST.json` together with its
+producer, its URL and the day it was downloaded.
