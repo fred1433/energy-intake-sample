@@ -1,0 +1,84 @@
+{
+  "retrievedAt": "2026-09-22",
+  "note": "Every file below was downloaded on the date above and is kept here unchanged. A .gz file is the original bytes, compressed; its sha256 is the sha256 of the original, not of the archive.",
+  "sources": [
+    {
+      "id": "vienna",
+      "city": "Vienna",
+      "producer": "Stadt Wien, Magistratsabteilung 20 (Energieplanung)",
+      "licence": "Creative Commons Attribution 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/deed.de",
+      "retrievedAt": "2026-09-22",
+      "files": [
+        {
+          "path": "vienna/endenergieenergietraeger2024.csv",
+          "url": "https://www.wien.gv.at/data/ogd/ma20/endenergieenergietraeger2024.csv",
+          "bytes": 4367,
+          "sha256": "438bab0dea67e2869bfeac8e6924be3180c610ba3ce0297b3f84006d982236e4",
+          "gzip": false
+        },
+        {
+          "path": "vienna/elenergiesektoren2024.csv",
+          "url": "https://www.wien.gv.at/data/ogd/ma20/elenergiesektoren2024.csv",
+          "bytes": 2884,
+          "sha256": "0f4b1162c23ba8b9a9cff164d6e46ea259c353a8d68034b4fb53d7ee1dc8acd0",
+          "gzip": false
+        }
+      ]
+    },
+    {
+      "id": "amsterdam",
+      "city": "Amsterdam",
+      "producer": "Gemeente Amsterdam, Datateam Stedelijke Ontwikkeling en Beheer (network data from Liander and Stedin)",
+      "licence": "Published as OPENBAAR on the municipal API",
+      "licenceUrl": "https://api.data.amsterdam.nl/v1/energieverbruik_mra/",
+      "retrievedAt": "2026-09-22",
+      "files": [
+        {
+          "path": "amsterdam/gas_en_elektriciteit_kwartaal.csv.gz",
+          "url": "https://api.data.amsterdam.nl/v1/energieverbruik_mra/v4/gas_en_elektriciteit_kwartaal/?gemeente=AMSTERDAM&_format=csv",
+          "bytes": 1665608,
+          "sha256": "0e6d9cc97c53cc67c1b0d1272db0c8a64b2236e08309a37f3dc325ffb0f1b293",
+          "gzip": true,
+          "uncompressedBytes": 10048231
+        }
+      ]
+    },
+    {
+      "id": "barcelona",
+      "city": "Barcelona",
+      "producer": "Ajuntament de Barcelona, Oficina Municipal de Dades (data from the Datadis platform)",
+      "licence": "Creative Commons Attribution 4.0",
+      "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "retrievedAt": "2026-09-22",
+      "files": [
+        {
+          "path": "barcelona/2024_consum_electricitat_bcn.csv.gz",
+          "url": "https://opendata-ajuntament.barcelona.cat/data/dataset/d9479057-781f-42b4-85e6-721bd0284130/resource/6f3a256a-dba6-46ac-88a4-546b93cb46da/download",
+          "bytes": 1223447,
+          "sha256": "d45968258065f5928d6b5730f5aafddc0c3d19568074a6bc7a79648a2cac107e",
+          "gzip": true,
+          "uncompressedBytes": 13588121
+        }
+      ]
+    },
+    {
+      "id": "ghent",
+      "city": "Ghent",
+      "producer": "Fluvius, distribution network operator for Flanders (Dataroom Fluvius)",
+      "licence": "Open data license - FLUVIUS",
+      "licenceUrl": "https://opendata.fluvius.be/p/licentieopendatafluvius",
+      "retrievedAt": "2026-09-22",
+      "files": [
+        {
+          "path": "ghent/verbruiksgegevens_per_statistische_sector_gent.csv.gz",
+          "url": "https://opendata.fluvius.be/api/explore/v2.1/catalog/datasets/1_06a-verbruiksgegevens-per-statistische-sector-met-nace-sector-en-nace-subsecto/exports/csv?where=gemeente%3D%22GENT%22&delimiter=%3B",
+          "bytes": 312933,
+          "sha256": "b2276339944ff1d43dd856ec9188f1d432fb466b52b95cc93cc3ea6ab0e03e60",
+          "gzip": true,
+          "uncompressedBytes": 2367241
+        }
+      ]
+    }
+  ]
+}

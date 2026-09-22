@@ -1,0 +1,141 @@
+{
+  "caseId": "vienna",
+  "runs": [
+    {
+      "fileId": "vienna-carriers",
+      "proposal": {
+        "dialect": {
+          "delimiter": ";",
+          "decimalSeparator": ",",
+          "thousandsSeparator": "none",
+          "encoding": "utf-8"
+        },
+        "rowFilters": [
+          {
+            "column": "YEAR",
+            "equals": "2024"
+          }
+        ],
+        "valueColumns": [
+          "ELECTRICITY"
+        ],
+        "periodColumn": "YEAR",
+        "declaredUnit": "GWh",
+        "unitEvidence": {
+          "kind": "column",
+          "quote": "GWh"
+        },
+        "unitColumn": "UNIT",
+        "rowSemantics": "its_own_slice",
+        "rowSemanticsEvidence": {
+          "quote": "Jaehrlicher Endenergieverbrauch in Wien nach Energietraegern in GWh"
+        },
+        "perimeter": "The kept row covers Vienna (NUTS3 AT130, district code 90001) for the single calendar year 2024, giving the ELECTRICITY carrier's share of final energy consumption as restated under the 2024 methodology (REF_YEAR=2024). It leaves out all other energy carriers (gas, oil, district heat, etc.), any breakdown by sector (covered instead by the separate 'Elektrische Energie nach Sektoren Wien' file), and any distinction between gross consumption and net/final consumption.",
+        "openQuestion": "Whether this ELECTRICITY column, defined as one carrier within 'Endenergieverbrauch nach Energietraegern' (final energy consumption by energy carrier), is the same quantity as 'annual electricity consumption of the territory' asked for, or whether the sector-based file (Source 2) or a different aggregation is the intended measure, is not decided here.",
+        "citations": [
+          {
+            "quote": "ELECTRICITY",
+            "where": "file",
+            "supports": "valueColumns"
+          },
+          {
+            "quote": "GWh",
+            "where": "file",
+            "supports": "declaredUnit and unitColumn"
+          },
+          {
+            "quote": "YEAR",
+            "where": "file",
+            "supports": "periodColumn"
+          },
+          {
+            "quote": "Jaehrlicher Endenergieverbrauch in Wien nach Energietraegern in GWh",
+            "where": "documentation",
+            "supports": "perimeter and rowSemantics"
+          },
+          {
+            "quote": "Both files carry a UNIT column. Both carry a REF_YEAR column: the whole series is restated on the methodology of the reference year, so a file published in a later year is not line by line identical to this one.",
+            "where": "documentation",
+            "supports": "perimeter"
+          }
+        ]
+      },
+      "usage": {
+        "model": "claude-sonnet-5",
+        "inputTokens": 6755,
+        "outputTokens": 2034
+      },
+      "recordedAt": "2026-09-22T15:07:48.958Z"
+    },
+    {
+      "fileId": "vienna-sectors",
+      "proposal": {
+        "dialect": {
+          "delimiter": ";",
+          "decimalSeparator": ",",
+          "thousandsSeparator": "none",
+          "encoding": "utf-8"
+        },
+        "rowFilters": [
+          {
+            "column": "YEAR",
+            "equals": "2024"
+          }
+        ],
+        "valueColumns": [
+          "AGRICULTURE",
+          "C_P_SERVICES",
+          "INDUSTRY",
+          "RESIDENTIAL",
+          "TRANSPORT"
+        ],
+        "periodColumn": "YEAR",
+        "declaredUnit": "GWh",
+        "unitEvidence": {
+          "kind": "column",
+          "quote": "GWh"
+        },
+        "unitColumn": "UNIT",
+        "rowSemantics": "its_own_slice",
+        "rowSemanticsEvidence": {
+          "quote": "YEAR: 37 distinct values: \"1988\", \"1989\", \"1990\", \"1991\", \"1992\", \"1993\", \"1994\", \"1995\", \"1996\", \"1997\", \"1998\", \"1999\", \"2000\", \"2001\", \"2002\", \"2003\", \"2004\", \"2005\", \"2006\", \"2007\", \"2008\", \"2009\", \"2010\", \"2011\", \"2012\", \"2013\", \"2014\", \"2015\", \"2016\", \"2017\", \"2018\", \"2019\", \"2020\", \"2021\", \"2022\", \"2023\", \"2024\""
+        },
+        "perimeter": "The kept row is the one whose YEAR column equals 2024, drawn from the file 'Elektrische Energie nach Sektoren Wien' (electricity by sector for Vienna, NUTS3 AT130). It gives, for that single year, five sector-level electricity totals - AGRICULTURE, C_P_SERVICES (commerce and public services), INDUSTRY, RESIDENTIAL and TRANSPORT - each already expressed in GWh per the UNIT column. Adding the five sector columns for that one row gives the territory's total electricity consumption for 2024 as restated under the 2024 methodology (REF_YEAR=2024). The file does not cover any sector outside these five, and does not distinguish sub-district detail (SUB_DISTRICT_CODE is uniformly 0).",
+        "openQuestion": "Whether summing the five sector columns (AGRICULTURE + C_P_SERVICES + INDUSTRY + RESIDENTIAL + TRANSPORT) is the correct way to obtain the territory's total electricity consumption, or whether the publisher intends some other aggregation or exclusion (e.g. transport electricity might already be counted elsewhere) is not stated in the material and is left to the requester.",
+        "citations": [
+          {
+            "quote": "GWh",
+            "where": "file",
+            "supports": "declaredUnit and unitColumn: the UNIT column carries the value GWh for every row, including the 2024 row."
+          },
+          {
+            "quote": "AT1;AT13;AT130;90001;0;1988;GWh;2024;24,72;1843,87;1051,11;1973,33;432,22",
+            "where": "file",
+            "supports": "shows the row structure: one row per YEAR, with sector columns AGRICULTURE, C_P_SERVICES, INDUSTRY, RESIDENTIAL, TRANSPORT and UNIT=GWh, REF_YEAR=2024."
+          },
+          {
+            "quote": "Elektrische Energie in Wien nach Sektoren Wien. Die Daten werden jaehrlich veroeffentlicht, immer 2 Jahre rueckwirkend.",
+            "where": "documentation",
+            "supports": "perimeter: confirms this file (Source 2) covers electrical energy in Vienna broken down by sector, published annually."
+          },
+          {
+            "quote": "Both files carry a UNIT column. Both carry a REF_YEAR column: the whole series is restated on the methodology of the reference year, so a file published in a later year is not line by line identical to this one.",
+            "where": "documentation",
+            "supports": "declaredUnit evidence and the note that REF_YEAR (2024) indicates the methodology under which the 2024 YEAR row is restated, distinguishing period (YEAR) from restatement basis (REF_YEAR)."
+          },
+          {
+            "quote": "YEAR: 37 distinct values: \"1988\", \"1989\", \"1990\", \"1991\", \"1992\", \"1993\", \"1994\", \"1995\", \"1996\", \"1997\", \"1998\", \"1999\", \"2000\", \"2001\", \"2002\", \"2003\", \"2004\", \"2005\", \"2006\", \"2007\", \"2008\", \"2009\", \"2010\", \"2011\", \"2012\", \"2013\", \"2014\", \"2015\", \"2016\", \"2017\", \"2018\", \"2019\", \"2020\", \"2021\", \"2022\", \"2023\", \"2024\"",
+            "where": "file",
+            "supports": "periodColumn and rowSemantics: 37 distinct YEAR values match 37 data rows, so each row is a distinct year, not a repeated figure."
+          }
+        ]
+      },
+      "usage": {
+        "model": "claude-sonnet-5",
+        "inputTokens": 5385,
+        "outputTokens": 3090
+      },
+      "recordedAt": "2026-09-22T15:08:18.495Z"
+    }
+  ]
+}

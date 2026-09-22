@@ -1,0 +1,79 @@
+{
+  "caseId": "ghent",
+  "runs": [
+    {
+      "fileId": "ghent-sectors",
+      "proposal": {
+        "dialect": {
+          "delimiter": ";",
+          "decimalSeparator": ".",
+          "thousandsSeparator": "none",
+          "encoding": "utf-8"
+        },
+        "rowFilters": [
+          {
+            "column": "verbruiksjaar",
+            "equals": "2024"
+          },
+          {
+            "column": "markt",
+            "equals": "Elektriciteit"
+          },
+          {
+            "column": "richting",
+            "equals": "Afname"
+          }
+        ],
+        "valueColumns": [
+          "afname"
+        ],
+        "periodColumn": "verbruiksjaar",
+        "declaredUnit": "not_declared",
+        "unitEvidence": {
+          "kind": "not_declared",
+          "quote": null
+        },
+        "unitColumn": null,
+        "rowSemantics": "its_own_slice",
+        "rowSemanticsEvidence": {
+          "quote": "In deze dataset zijn verbruiksgegevens geaggregeerd per markt (elektriciteit/gas), richting (injectie/afname), statistische sector, NACE sector en NACE subsector."
+        },
+        "perimeter": "The kept rows cover electricity (markt=Elektriciteit) off-take (richting=Afname) consumption for the municipality of Ghent (gemeente=GENT) for the calendar year 2024, broken down by statistical sector, NACE sector and NACE subsector. They exclude gas consumption, exclude injected (fed-back) electricity, and exclude the 'Gecombineerd' direction rows. The municipality assignment is based on the postal code of the delivery address, not necessarily the legal municipal boundary.",
+        "openQuestion": "The documentation does not state the measurement unit of the 'afname' column (labelled only as a 'double' with a description of an approximated consumption volume); converting the summed value to GWh requires assuming it is expressed in kWh, which is the Fluvius convention but is not explicitly declared here, and that assumption is left unconfirmed.",
+        "citations": [
+          {
+            "quote": "De verbruiken werden geaggregeerd naar een kalenderjaar (01/jan-31/dec).",
+            "where": "documentation",
+            "supports": "periodColumn / verbruiksjaar as the finest period marker for a row"
+          },
+          {
+            "quote": "Afname is het afnemen van elektriciteit en/of aardgas vanuit het distributienet.",
+            "where": "documentation",
+            "supports": "rowFilters: richting=Afname selects off-take (consumption) rather than injection"
+          },
+          {
+            "quote": "Elektriciteit of gas",
+            "where": "documentation",
+            "supports": "rowFilters: markt=Elektriciteit selects the electricity market rows"
+          },
+          {
+            "quote": "In deze dataset zijn verbruiksgegevens geaggregeerd per markt (elektriciteit/gas), richting (injectie/afname), statistische sector, NACE sector en NACE subsector.",
+            "where": "documentation",
+            "supports": "rowSemantics: each row is a distinct slice by statistical sector/NACE sector/subsector, so rows can be summed to a total"
+          },
+          {
+            "quote": "Berekende waarde van verbruik die aanleunt bij het volume van de afgenomen energie, maar dan herleid naar kalenderjaar/kalendermaand.",
+            "where": "documentation",
+            "supports": "valueColumns: afname is the approximated consumption value to be summed"
+          }
+        ]
+      },
+      "usage": {
+        "model": "claude-sonnet-5",
+        "inputTokens": 6310,
+        "outputTokens": 2354
+      },
+      "recordedAt": "2026-09-22T15:09:49.705Z"
+    }
+  ]
+}

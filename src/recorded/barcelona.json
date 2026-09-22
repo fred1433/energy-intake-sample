@@ -1,0 +1,66 @@
+{
+  "caseId": "barcelona",
+  "runs": [
+    {
+      "fileId": "barcelona-2024",
+      "proposal": {
+        "dialect": {
+          "delimiter": ",",
+          "decimalSeparator": ".",
+          "thousandsSeparator": "none",
+          "encoding": "utf-8"
+        },
+        "rowFilters": [
+          {
+            "column": "Any",
+            "equals": "2024"
+          }
+        ],
+        "valueColumns": [
+          "Valor"
+        ],
+        "periodColumn": "Data",
+        "declaredUnit": "MWh",
+        "unitEvidence": {
+          "kind": "documentation",
+          "quote": "06.Valor = Consum elèctric en megawatt  hores"
+        },
+        "unitColumn": null,
+        "rowSemantics": "its_own_slice",
+        "rowSemanticsEvidence": {
+          "quote": "Daily electric cosumption by postal code, economic sector and time interval in the city of Barcelona"
+        },
+        "perimeter": "The kept rows cover all electricity consumption records for the city of Barcelona in 2024, broken down by postal code (Codi_Postal), economic sector (Sector_Economic: Indústria, Residencial, Serveis), and four 6-hour time intervals plus an 'unclassified' category (Tram_Horari), for every day of the year (Data). Summing Valor across all these dimensions for Any=2024 should give the total annual consumption for the whole municipal territory, assuming every postal code in the city and every sector are represented and that the 'No consta' rows (time interval not recorded) do not double-count consumption already reported elsewhere.",
+        "openQuestion": "Whether the 'No consta' Tram_Horari rows represent consumption not otherwise captured (and thus must be summed in) or are simply placeholder zero rows, and whether the publisher intends the reported MWh figures to be summed directly into an annual GWh total without further adjustment (e.g., for network losses or self-consumption not captured by Datadis).",
+        "citations": [
+          {
+            "quote": "06.Valor = Consum elèctric en megawatt  hores",
+            "where": "documentation",
+            "supports": "declaredUnit and unitEvidence"
+          },
+          {
+            "quote": "Daily electric cosumption by postal code, economic sector and time interval in the city of Barcelona",
+            "where": "documentation",
+            "supports": "rowSemantics and perimeter"
+          },
+          {
+            "quote": "Any,Data,Codi_Postal,Sector_Economic,Tram_Horari,Valor",
+            "where": "file",
+            "supports": "column structure and periodColumn choice"
+          },
+          {
+            "quote": "2024,2024-01-01,08001,Indústria,De 00:00:00 a 05:59:59 h,272",
+            "where": "file",
+            "supports": "rowFilters and valueColumns example"
+          }
+        ]
+      },
+      "usage": {
+        "model": "claude-sonnet-5",
+        "inputTokens": 3852,
+        "outputTokens": 1847
+      },
+      "recordedAt": "2026-09-22T15:09:25.165Z"
+    }
+  ]
+}

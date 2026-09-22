@@ -1,0 +1,5 @@
+city,year,value_gwh,value_gj,decision,source_retrieved
+Vienna,2024,7796.50,28067400,admissible,2026-09-22
+Amsterdam,2024,,,out_of_scope,2026-09-22
+Barcelona,2024,,,documentary_contradiction,2026-09-22
+Ghent,2024,,,insufficient_information,2026-09-22

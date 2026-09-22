@@ -1,0 +1,23 @@
+Publisher documentation, copied verbatim on 2026-09-22.
+
+SOURCE 1
+Catalogue record: https://data.gv.at/katalog/datasets/79a6b958-f28d-4175-b8c8-ee8c5b5d238c
+Title: Endenergieverbrauch nach Energietraegern Wien
+Description: Jaehrlicher Endenergieverbrauch in Wien nach Energietraegern in GWh
+Publisher: Stadt Wien, Magistratsabteilung 20 (Energieplanung)
+Licence: Creative Commons Attribution 4.0 (https://creativecommons.org/licenses/by/4.0/deed.de)
+Last modified by the publisher: 2025-12-16
+File: https://www.wien.gv.at/data/ogd/ma20/endenergieenergietraeger2024.csv
+
+SOURCE 2
+Catalogue record: https://data.gv.at/katalog/datasets/f1090773-2eef-4946-ab87-9581d39890ab
+Title: Elektrische Energie nach Sektoren Wien
+Description: Elektrische Energie in Wien nach Sektoren Wien. Die Daten werden jaehrlich veroeffentlicht, immer 2 Jahre rueckwirkend.
+Publisher: Stadt Wien, Magistratsabteilung 20 (Energieplanung)
+Licence: Creative Commons Attribution 4.0 (https://creativecommons.org/licenses/by/4.0/deed.de)
+Last modified by the publisher: 2025-12-16
+File: https://www.wien.gv.at/data/ogd/ma20/elenergiesektoren2024.csv
+
+Both files carry a UNIT column. Both carry a REF_YEAR column: the whole series is restated on
+the methodology of the reference year, so a file published in a later year is not line by line
+identical to this one.

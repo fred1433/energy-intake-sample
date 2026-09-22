@@ -1,0 +1,28 @@
+Publisher documentation, copied verbatim on 2026-09-22.
+
+Catalogue record: https://opendata.fluvius.be/explore/dataset/1_06a-verbruiksgegevens-per-statistische-sector-met-nace-sector-en-nace-subsecto/
+Title (nl): Verbruiksgegevens per statistische sector met NACE sector en NACE subsector
+Title (en): Consumption data per statistical sector with NACE sector and NACE subsector
+Description (nl): In deze dataset zijn verbruiksgegevens geaggregeerd per markt (elektriciteit/gas), richting (injectie/afname), statistische sector, NACE sector en NACE subsector.De verbruiken worden geaggregeerd naar een kalenderjaar (01/jan-31/dec). De hoofdgemeente bepalen we aan de hand van de postcode waar het punt zich bevindt (leveringsadres).De code voor een statistische sector bestaat uit 9 tekens waarvan de betekenis is weergegeven in de legende.
+Description (en): In this dataset, consumption data is aggregated by market (electricity/gas), direction (injection/off-take), statistical sector, NACE sector and NACE subsector.Consumption is aggregated per calendar year (Jan 1 - Dec 31). The main municipality is determined based on the postal code where the point is located (delivery address).The code for a statistical sector consists of 9 characters, the meaning of which is shown in the legend.
+Publisher: Dataroom Fluvius (Fluvius, distribution network operator, Flanders)
+Licence: Open data license - FLUVIUS (https://opendata.fluvius.be/p/licentieopendatafluvius)
+Language: nl
+Update frequency: ANNUAL
+Records in the full table: 784467
+Last modified by the publisher: 2026-08-24T11:36:43.464000+00:00
+File: https://opendata.fluvius.be/api/explore/v2.1/catalog/datasets/1_06a-verbruiksgegevens-per-statistische-sector-met-nace-sector-en-nace-subsecto/exports/csv?where=gemeente%3D%22GENT%22&delimiter=%3B
+
+Field descriptions published with the dataset:
+  "verbruiksjaar": label = "Verbruiksjaar" | type = date | description = "De verbruiken werden geaggregeerd naar een kalenderjaar (01/jan-31/dec)."
+  "richting": label = "RICHTING" | type = text | description = "Op een toegangspunt kan elektriciteit of aardgas afgenomen en/of geïnjecteerd worden in het distributienet. Afname is het afnemen van elektriciteit en/of aardgas vanuit het distributienet. Injectie is het overschot aan energie dat door de netgebruiker is geproduceerd en niet voor eigen gebruik geconsumeerd wordt, maar wordt terug geleverd aan het distributienet."
+  "markt": label = "MARKT" | type = text | description = "Elektriciteit of gas"
+  "statistische_sector": label = "Statistische Sector" | type = text | description = "De statistische sectorcode waarbinnen de betreffende toegangspunten gelegen zijn. De code voor een statistische sector bestaat uit 9 tekens. De eerste 5 cijfers van de code bevatten de NIS-code van de betreffende gemeente.  Het zesde teken (cijfer of letter) verwijst naar een voormalige gemeente, grondgebied of stadsindeling. Daarop volgt het wijknummer. Het voorlaatste teken impliceert het bodemgebruik. Het laatste teken geeft eventuele wijzigingen ten opzichte van voorafgaande statistische sector bepalingen weer."
+  "provincie": label = "PROVINCIE" | type = text | description = "De provincie wordt bepaald aan de hand van de postcode waar het punt zich bevindt (leveringsadres)."
+  "gemeente": label = "GEMEENTE" | type = text | description = "De hoofdgemeente wordt bepaald aan de hand van de postcode waar het punt zich bevindt (leveringsadres)."
+  "sector": label = "SECTOR" | type = text | description = "De toewijzing Sector- en Subsector gebeurt aan de hand van de NACE-code van het aansluitingspunt en de netgebruikercategorie (residentieel of niet-residenteel) en het type aansluiting. De subsector- en sectoromschrijving zijn conform aan de vertaling van de NACE-codes door het VITO (Vlaams Instituut voor Technologisch Ontwikkeling)."
+  "subsector": label = "SUBSECTOR" | type = text | description = "De toewijzing Sector- en Subsector gebeurt aan de hand van de NACE-code van het aansluitingspunt en de netgebruikercategorie (residentieel of niet-residenteel) en het type aansluiting. De subsector- en sectoromschrijving zijn conform aan de vertaling van de NACE-codes door het VITO (Vlaams Instituut voor Technologisch Ontwikkeling)."
+  "contact_rol": label = "CONTACT_ROL" | type = text | description = ""
+  "aantal": label = "Aantal" | type = int | description = "Het totaal van het aantal toegangspunten waarvoor het verbruik geaggregeerd is, waarbij een toegangspunt geïdentificeerd wordt door een unieke EAN."
+  "afname": label = "Afname" | type = double | description = "Berekende waarde van verbruik die aanleunt bij het volume van de afgenomen energie, maar dan herleid naar kalenderjaar/kalendermaand. Deze benaderende verbruiken worden maandelijks berekend."
+  "injectie": label = "Injectie" | type = int | description = "Berekende waarde van verbruik die aanleunt bij het volume van de geïnjecteerde energie, maar dan herleid naar kalenderjaar/kalendermaand. Deze benaderende verbruiken worden maandelijks berekend."

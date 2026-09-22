@@ -1,0 +1,84 @@
+{
+  "caseId": "amsterdam",
+  "runs": [
+    {
+      "fileId": "amsterdam-quarterly",
+      "proposal": {
+        "dialect": {
+          "delimiter": ",",
+          "decimalSeparator": ".",
+          "thousandsSeparator": "none",
+          "encoding": "utf-8"
+        },
+        "rowFilters": [
+          {
+            "column": "gemeente",
+            "equals": "AMSTERDAM"
+          },
+          {
+            "column": "product",
+            "equals": "ELK"
+          },
+          {
+            "column": "jaar",
+            "equals": "2024"
+          }
+        ],
+        "valueColumns": [
+          "standaardjaarLevering"
+        ],
+        "periodColumn": "jaarKwartaal",
+        "declaredUnit": "kWh",
+        "unitEvidence": {
+          "kind": "documentation",
+          "quote": "Schatting op basis van historische gegevens van het jaarverbruik in kWh (elektriciteit) of nm3 (gas)."
+        },
+        "unitColumn": null,
+        "rowSemantics": "repeats_a_quantity_other_rows_carry",
+        "rowSemanticsEvidence": {
+          "quote": "Schatting op basis van historische gegevens van het jaarverbruik in kWh (elektriciteit) of nm3 (gas)."
+        },
+        "perimeter": "The kept rows cover electricity (product = ELK) connections located within the municipality of Amsterdam, broken down by wijk/buurt (neighbourhood) and by customer segment (GVB = grootverbruik, KVB = kleinverbruik). Each row is a quarterly snapshot (peildatum/jaarKwartaal) that reports, for that area/segment, an estimate of the connection's annual electricity supply (standaardjaarLevering) based on historical data, not the consumption that occurred during that particular quarter. A separate column, standaardjaarTeruglevering, records estimated annual feed-back (e.g. from solar panels) and is excluded here since it is a distinct quantity (export/production) rather than consumption. Only Liander's network area appears in this file even though the dataset description mentions a table merged with Stedin data.",
+        "openQuestion": "Because standaardjaarLevering is described as an annualized estimate re-derived at each quarterly peildatum rather than a measure of that quarter's actual usage, the four 2024 quarters likely restate close to the same annual figure rather than four additive slices; I am not deciding which single peildatum (e.g. the last quarter of 2024) should be treated as the year's representative annual estimate, nor whether the feed-back volume (standaardjaarTeruglevering) should be netted against delivered supply to obtain a net-consumption figure.",
+        "citations": [
+          {
+            "quote": "id,peildatum,jaar,jaarKwartaal,product,klantsegment,gemeente,wijkCode,wijkNaam,buurtCode,buurtNaam,standaardjaarLevering,standaardjaarTeruglevering,aantalAansluitingen,netbeheerder",
+            "where": "file",
+            "supports": "delimiter and column names, including periodColumn and valueColumns choice"
+          },
+          {
+            "quote": "\"product\": title = \"Energieverbruik producttype\" | description = \"Het producttype: ELK = elektriciteit, GAS = gas.\"",
+            "where": "documentation",
+            "supports": "rowFilters product=ELK selects electricity rows"
+          },
+          {
+            "quote": "\"gemeente\": title = \"Aansluiting gemeente\" | description = \"De gemeente waar binnen de aansluitingen zich bevinden.\"",
+            "where": "documentation",
+            "supports": "rowFilters gemeente=AMSTERDAM restricts to the municipality's territory"
+          },
+          {
+            "quote": "\"standaardjaarLevering\": title = \"Schatting levering per jaar\" | description = \"Schatting op basis van historische gegevens van het jaarverbruik in kWh (elektriciteit) of nm3 (gas).\"",
+            "where": "documentation",
+            "supports": "declaredUnit kWh and valueColumns choice of standaardjaarLevering as the consumption figure"
+          },
+          {
+            "quote": "\"standaardjaarTeruglevering\": title = \"Schatting teruglevering per jaar\" | description = \"Schatting op basis van historische gegevens van de jaarlijkse teruglevering in kWh (elektriciteit) of nm3 (gas).\"",
+            "where": "documentation",
+            "supports": "exclusion of teruglevering as a different quantity (feed-back), not consumption"
+          },
+          {
+            "quote": "\"jaarKwartaal\": title = \"Energieverbruik kwartaal van jaar\" | description = \"Het jaar en kwartaal waarop het verbruik betrekking heeft.\"",
+            "where": "documentation",
+            "supports": "periodColumn choice as the finest period distinguishing rows within a year"
+          }
+        ]
+      },
+      "usage": {
+        "model": "claude-sonnet-5",
+        "inputTokens": 6145,
+        "outputTokens": 4751
+      },
+      "recordedAt": "2026-09-22T15:09:05.426Z"
+    }
+  ]
+}

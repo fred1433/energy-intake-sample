@@ -1,0 +1,16 @@
+Publisher documentation, copied verbatim on 2026-09-22.
+
+Catalogue record: https://opendata-ajuntament.barcelona.cat/data/api/3/action/package_show?id=d9479057-781f-42b4-85e6-721bd0284130
+Title: Electricity consumption by postal code, economic sector and time interval in teh city of Barcelona
+Description: Daily electric cosumption by postal code, economic sector and time interval in the city of Barcelona, according to the data provided by the  __[Datadis](https://datadis.es)__ platform.
+Publisher: Ajuntament de Barcelona, Oficina Municipal de Dades
+Licence: Creative Commons Attribution 4.0 (https://creativecommons.org/licenses/by/4.0/)
+File: https://opendata-ajuntament.barcelona.cat/data/dataset/d9479057-781f-42b4-85e6-721bd0284130/resource/6f3a256a-dba6-46ac-88a4-546b93cb46da/download
+
+Field descriptions published with the dataset:
+  01.Any = Any de les dades
+  02.Data = Data en format YYYY - MM – DD
+  03.Codi_Postal =  Codi postal
+  04.Sector_Economic = Sector econòmic
+  05.Tram_Horari =  Tram horari en format HH:MM:SS
+  06.Valor = Consum elèctric en megawatt  hores 

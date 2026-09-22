@@ -1,0 +1,29 @@
+Publisher documentation, copied verbatim on 2026-09-22.
+
+Dataset: Energieverbruik MRA
+Table: gasEnElektriciteitKwartaal, version 4.0.0
+Title: Gas- en elektriciteitsverbruik MRA kwartaal
+Description: Verbruiksdata gas en elektriciteit per kwartaal van de Metropoolregio Amsterdam. Samengevoegde tabel met verbruiksdata van Liander en Stedin.
+Owner: Gemeente Amsterdam
+Creator: Datateam Stedelijke Ontwikkeling en Beheer
+Authorisation: OPENBAAR
+Language: nl
+Schema: https://schemas.data.amsterdam.nl/datasets/energieverbruik_mra/gasEnElektriciteitKwartaal/v4
+File: https://api.data.amsterdam.nl/v1/energieverbruik_mra/v4/gas_en_elektriciteit_kwartaal/?gemeente=AMSTERDAM&_format=csv
+
+Field descriptions published with the table:
+  "id": title = "Energieverbruik ID" | description = "Unieke aanduiding record."
+  "peildatum": title = "Energieverbruik peildatum" | description = "Peildatum waarop het verbruik betrekking heeft."
+  "jaar": title = "Energieverbruik jaar" | description = "Het jaar waarop het verbruik betrekking heeft."
+  "jaarKwartaal": title = "Energieverbruik kwartaal van jaar" | description = "Het jaar en kwartaal waarop het verbruik betrekking heeft."
+  "product": title = "Energieverbruik producttype" | description = "Het producttype: ELK = elektriciteit, GAS = gas."
+  "klantsegment": title = "Klanttypering" | description = "Typering van de grootte van de aansluiting: KVB = kleinverbruik, GVB = grootverbruik."
+  "gemeente": title = "Aansluiting gemeente" | description = "De gemeente waar binnen de aansluitingen zich bevinden."
+  "wijkCode": title = "Aansluiting wijkcode" | description = "Code van de wijk waar binnen de aansluitingen zich bevinden."
+  "wijkNaam": title = "Aansluiting wijknaam" | description = "Naam van de wijk waar binnen de aansluitingen zich bevinden."
+  "buurtCode": title = "Aansluiting buurtcode" | description = "Code van de buurt waar binnen de aansluitingen zich bevinden.."
+  "buurtNaam": title = "Aansluiting buurtnaam" | description = "Naam van de buurt waar binnen de aansluitingen zich bevinden."
+  "standaardjaarLevering": title = "Schatting levering per jaar" | description = "Schatting op basis van historische gegevens van het jaarverbruik in kWh (elektriciteit) of nm3 (gas)."
+  "standaardjaarTeruglevering": title = "Schatting teruglevering per jaar" | description = "Schatting op basis van historische gegevens van de jaarlijkse teruglevering in kWh (elektriciteit) of nm3 (gas)."
+  "aantalAansluitingen": title = "Energieverbruik Aantal aansluitingen" | description = "Het aantal afleverpunten."
+  "netbeheerder": title = "Energieverbruik netbeheerder" | description = "Netbeheerder van de verbruiksdata."
